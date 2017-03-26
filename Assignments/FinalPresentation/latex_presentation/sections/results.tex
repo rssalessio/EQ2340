@@ -1,0 +1,111 @@
+%--------------------------------------------------------------------------------------------------
+% Präsentation ICC-System:
+%		Stand der Dinge in Sachen Rückkopplungskompensation und Ausblick
+%
+%--------------------------------------------------------------------------------------------------
+
+
+\section{Results}
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% New subsection
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\subsection{System Performance}
+
+%--------------------------------------------------------------------------------------------------
+% New frame
+%--------------------------------------------------------------------------------------------------
+\begin{frame}{\insertsection}{\insertsubsection}   
+ 
+\headline{Classification Errors}
+\begin{itemize}
+   \uncover<1->{
+ \item Average Classification Error: 1.2 \%(validation) and 4.9 \% (overall) }
+ \uncover<2->{
+ \item Most commonly missclassified: \textit{hand} with 16.6 \% and  30 \%}
+ \end{itemize}
+
+ \end{frame}
+ 
+ \begin{frame}{\insertsection}{\insertsubsection}   
+ \vspace{-2mm}
+ \only<1>{
+C = 
+$$
+ \begin{pmatrix}
+46	& 0 &	0 &	0	&0	&0	&0&	0&	0&14	&0&0	&0&	0 \\
+0	&57	&0	&0	&3	&0&	0	&0	&0&	0	&0&	0	&0&	0\\
+0	&0&	60&	0	&0	&0	&0	&0&	0&	0&	0&	0	&0&	0\\
+0	&0&	0&	60	&0&	0	&0	&0	&0	&0	&0&	0	&0&	0\\
+0	&0	&0&	0	&60	&0&	0&	0	&0	&0&	0&	0&	0	&0\\
+0	&0&	0	&0	&0&	60	&0&	0&	0&	0&	0	&0	&0&	0\\
+0	&0&0&	0&	0	&0	&60	&0&	0&	0&	0&	0	&0	&0\\
+0	&0&	0	&0	&0	&0	&0&	60&	0&	0&	0&	0&	0&	0\\
+0&	0&	0&	0&	0&	0	&0	&0&	57	&0	&1&	0	&0&	2\\
+0	&0&	0	&0&	0	&0	&0	&0	&0	&60	&0	&0&	0	&0\\
+0	&0&	7&	0	&0	&11&	0	&0	&0	&0&	42	&0	&0	&0\\
+0	&0	&0&	0&	0	&0	&0&	0&	0	&0	&0&	60&	0&	0\\
+0&	0	&0&	0	&1	&0&	0&	0&	0	&0	&0&	0	&57&	2\\
+0	&0	&0&	0&	0&	0	&0	&0&	0&	0	&0	&0&	0&	60\\
+ \end{pmatrix}
+ $$}
+ \only<2>{
+ \movie[externalviewer]{Lars: recognition}{lars_recognition-01.wav}\\
+  \movie[externalviewer]{Martin: recognition}{martin_recognition-01.wav}\\
+\movie[externalviewer]{Natalie: recognition}{natalie_recognition-11.wav}}
+ 
+  \end{frame}
+  
+  \subsection{Conclusion}
+
+%--------------------------------------------------------------------------------------------------
+% New frame
+%--------------------------------------------------------------------------------------------------
+\begin{frame}{\insertsection}{\insertsubsection}   
+ 
+\headline{Take aways}
+\medskip
+\begin{itemize}
+\uncover<1->{
+\item If data is rare, use smaller k in k-fold approach}
+\uncover<2->{
+\item Good training data is important}
+\uncover<3->{
+\item Collect more training data (remember trade-off)\\
+but: then be aware of overfitting!}
+\end{itemize}
+\uncover<4->{
+\headline{The system}}
+\begin{itemize}
+\uncover<4->{
+\item Satisfying overall recognition rate}
+\uncover<5->{
+\item Problems with the words \textit{hand} and \textit{recognition}}
+\uncover<6->{
+\item less problems with \textit{affect} and \textit{effect} or short words }
+\end{itemize}
+
+
+
+
+
+
+
+ \end{frame}
+ 
+ \subsection{Live Demonstration}
+ %--------------------------------------------------------------------------------------------------
+% New frame
+%--------------------------------------------------------------------------------------------------
+\begin{frame}{\insertsection}{\insertsubsection}   
+\headline{...}
+
+ 
+ \end{frame}
+ 
+
+
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% New subsection
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

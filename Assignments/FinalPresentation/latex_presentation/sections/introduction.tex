@@ -1,0 +1,79 @@
+%--------------------------------------------------------------------------------------------------
+% Präsentation ICC-System:
+%		Stand der Dinge in Sachen Rückkopplungskompensation und Ausblick
+%
+%--------------------------------------------------------------------------------------------------
+
+
+\section{Introduction}
+
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% New subsection
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\subsection{Problem Formulation}
+
+%--------------------------------------------------------------------------------------------------
+% New frame
+%--------------------------------------------------------------------------------------------------
+\begin{frame}{\insertsection}{\insertsubsection}   
+ 
+\medskip
+\headline{Speech Recognition of a limited speech corpus}\\
+\only<2-3>{
+\begin{itemize}
+\item High demand in industry
+\item Usage in current systems (e.g. Siri)
+\item Easy to understand general principle
+\end{itemize}
+}
+\only<3>{
+\headline{Speech Corpus}
+\begin{itemize}
+\item General speech corpus to form sentences
+\item Multisyllabic, similar and short words to challenge the system
+\end{itemize}
+}
+\only<4>{
+\vspace{0mm}
+\begin{center}
+\includegraphics[width=0.65\textwidth]{figures/problem}
+\end{center}}
+\only<5>{
+\begin{itemize}
+\item Two examples...
+\end{itemize}
+\movie[externalviewer]{Lars: affect}{lars_affect-01.wav}\\
+\movie[externalviewer]{Natalie: recognition}{natalie_recognition-11.wav}
+}
+%talk about application and data
+%why did we choose this project
+\end{frame}
+ 
+ 
+ 
+ 
+ %~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% New subsection
+%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\subsection{System architecture}
+
+%--------------------------------------------------------------------------------------------------
+% New frame
+%--------------------------------------------------------------------------------------------------
+\begin{frame}{\insertsection}{\insertsubsection}   
+ 
+\headline{Overview of the Implementation}
+\vspace{0mm}
+\begin{center}
+\includegraphics[width=0.85\textwidth]{figures/system}
+\end{center}
+%picture and rough description of the system
+\only<2>{
+\begin{itemize}
+\item Distinguish between training and validation/live demonstration
+\end{itemize}}
+ \end{frame}
+ 
+ 
+
+ 

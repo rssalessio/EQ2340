@@ -1,0 +1,228 @@
+\typeout{^^J beamer_dss.tex, version 2.1,  2012-09-09^^J}
+
+%--------------------------------------------------------------------------------------------------
+% Packages
+%--------------------------------------------------------------------------------------------------
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[latin1]{inputenc}
+\usepackage{verbatim}
+\usepackage{pgfpages}
+\usepackage{booktabs}
+\usepackage{hyperref}
+
+%--------------------------------------------------------------------------------------------------
+% Define macros
+%--------------------------------------------------------------------------------------------------
+\newcommand{\tindex}[1]{_{\textrm{\normalsize{#1}}}}
+\newcommand{\headline}[1]{\textcolor{tf_blue_light}{\textbf{#1}}}
+
+%--------------------------------------------------------------------------------------------------
+% Beamer themes
+%--------------------------------------------------------------------------------------------------
+\usetheme{default}
+
+\useinnertheme[shadow]{rounded} 
+\usecolortheme{orchid}
+\usefonttheme[onlymath]{serif}     % Use serif fonts for mathematical text
+
+\setbeamertemplate{headline}[default]
+
+\setbeamersize{text margin left = 0.5cm, text margin right = 0.5cm} % sets frame margins
+\beamertemplatenavigationsymbolsempty % no navigation symbols
+\setbeamercovered{invisible} % uncovered objects are invisible, other are "dynamic", "higly dynamic", "tranparent=n%"
+
+%--------------------------------------------------------------------------------------------------
+% Define colors
+%--------------------------------------------------------------------------------------------------
+% --- Original CAU colors for TF
+%\definecolor{tf_blue_light}{RGB}{0, 43, 217}   % Fakultätsfarbe: Pantone 280
+\definecolor{tf_blue_dark}{RGB}{0, 0, 191}     % Mischfarbe: HKS 33 + Pantone 280
+
+% --- Colors of ppt template
+\definecolor{tf_blue_light}{RGB}{0, 33, 146}  % color from PPT-template
+\definecolor{dss_light_gray}{RGB}{216, 216, 216}  % color from PPT-template
+\definecolor{dss_dark_gray}{RGB}{149, 149, 149}  % color from PPT-template
+
+%--------------------------------------------------------------------------------------------------
+% Set colors
+%--------------------------------------------------------------------------------------------------
+%--- Colors of header
+\setbeamercolor{frametitle}{fg=white,bg=tf_blue_light} 
+\setbeamercolor{framesubtitle}{fg=black,bg=dss_light_gray} 
+
+% --- Colors of boxes
+\setbeamercolor{block title}{bg=tf_blue_light}
+\setbeamercolor{structure}{fg=tf_blue_light}
+
+\setbeamercolor{title}{fg=black, bg=dss_dark_gray}
+\setbeamerfont{institute}{size = \scriptsize}
+\setbeamerfont{date}{parent=institute}
+\setbeamerfont{title}{parent=institute} 
+\setbeamerfont{subtitle}{parent=institute} 
+
+%--------------------------------------------------------------------------------------------------
+% Set bullets for...
+%--------------------------------------------------------------------------------------------------
+% --- Table of contents
+\setbeamertemplate{sections/subsections in toc}[sections numbered]
+\setbeamertemplate{subsection in toc}{\qquad -  \inserttocsubsection \par }
+		
+% --- Itemizations
+\setbeamertemplate{itemize item}[triangle]
+\setbeamertemplate{itemize subitem}[circle]
+\setbeamertemplate{itemize subsubitem}[circle]
+
+% --- Enumerations
+\setbeamertemplate{enumerate items}[default]
+
+%--------------------------------------------------------------------------------------------------
+% Set titleframe
+%--------------------------------------------------------------------------------------------------
+\setbeamertemplate{title page}
+{
+	%------------------------------------------------------------------------------------------------
+	% Blue box
+	%------------------------------------------------------------------------------------------------
+	\vbox{}\vskip-3.8ex
+	\begin{beamercolorbox}[wd=\paperwidth,ht=9mm,leftskip=2mm,dp=3mm]{frametitle}	
+		\hfill
+		\begin{minipage}{0.2\paperwidth}
+			%\includegraphics[width=\textwidth]{\StyleDir cau_logo}
+			\includegraphics[width=\textwidth]{\StyleDir cau_logo_big}
+		\end{minipage}		
+	\end{beamercolorbox}
+	
+	\vskip-1.0mm % to remove a tiny white space between both bars
+	
+	%------------------------------------------------------------------------------------------------
+	% Dark gray box
+	%------------------------------------------------------------------------------------------------
+	\begin{beamercolorbox}[wd=\paperwidth,ht=20.0mm,leftskip=2mm,dp=0.5mm, rightskip = 0.5mm]{title}
+		\vspace{5mm}
+		\begin{minipage}[b]{1.0\paperwidth} 
+			\usebeamerfont{title} \inserttitle \newline
+			\usebeamerfont{subtitle} \insertsubtitle
+		\end{minipage}
+	\end{beamercolorbox}
+	
+	%------------------------------------------------------------------------------------------------
+	% Light gray box
+	%------------------------------------------------------------------------------------------------
+	\vskip-1.4mm % to remove a tiny white space between both bars	
+	\begin{beamercolorbox}[wd=\paperwidth,ht=70.0mm,leftskip=2mm,dp=0.5mm, rightskip = 0.5mm]{framesubtitle}
+		\vspace{5mm}
+		\begin{minipage}[b]{0.5\paperwidth} 
+			\insertauthor \newline
+						
+		  \usebeamerfont{institute}	\vspace{5mm}			
+			\insertdate \newline
+			
+			\insertinstitute
+		
+		%----------------------------------------------------------------------------------------------
+		% CAU-logo (seal)
+		%----------------------------------------------------------------------------------------------
+		\end{minipage}
+		\begin{minipage}[b]{0.5\paperwidth} 			
+			\begin{center}
+				\includegraphics[width=0.8\textwidth]{\StyleDir cau_seal}
+			\end{center}			
+		\end{minipage}		
+	\end{beamercolorbox}
+}
+
+%--------------------------------------------------------------------------------------------------
+% Set frametitle
+%--------------------------------------------------------------------------------------------------
+\setbeamertemplate{frametitle}
+{
+	%------------------------------------------------------------------------------------------------
+	% Blue box
+	%------------------------------------------------------------------------------------------------
+	\vbox{}\vskip-3.8ex
+	\begin{beamercolorbox}[wd=\paperwidth,ht=7mm,leftskip=2mm,dp=3mm]{frametitle}	
+		\begin{minipage}{0.75\paperwidth} 
+			\usebeamerfont{frametitle} \insertframetitle
+		\end{minipage}
+		%
+		\hfill
+		\begin{minipage}{0.2\paperwidth}
+			%\includegraphics[width=\textwidth]{\StyleDir cau_logo}
+			\includegraphics[width=\textwidth]{\StyleDir cau_logo_big}
+		\end{minipage}		
+	\end{beamercolorbox}
+	
+	\vskip-1.4mm % to remove a tiny white space between both bars
+	
+	%------------------------------------------------------------------------------------------------
+	% Light gray box
+	%------------------------------------------------------------------------------------------------	
+	\begin{beamercolorbox}[wd=\paperwidth,ht=4.0mm,leftskip=2mm,dp=0.5mm, rightskip = 0.5mm]{framesubtitle}
+		\begin{minipage}{0.75\paperwidth} 
+			\usebeamerfont{framesubtitle} \insertframesubtitle
+		\end{minipage}
+		%
+		\hfill
+		\begin{minipage}{0.2\paperwidth}
+		  \usebeamerfont{framesubtitle} 	
+					%\bf
+			%\begin{flushright}
+				%\scalebox{0.5}{Christian-Albrechts-Universit\"at} \\[-2.5mm]
+				%\scalebox{0.5}{zu Kiel}
+			%\end{flushright}
+
+		\end{minipage}		
+	\end{beamercolorbox}
+	
+}
+
+%--------------------------------------------------------------------------------------------------
+% Set footline
+%--------------------------------------------------------------------------------------------------
+\setbeamertemplate{footline}{		
+	%------------------------------------------------------------------------------------------------
+	% Left section: DSS logo
+	%------------------------------------------------------------------------------------------------
+	\begin{beamercolorbox}[wd=\paperwidth,ht=1.0mm,leftskip=3mm,dp=3.5mm]{framesubtitle}
+		\begin{minipage}[t][0.25cm][c]{0.95cm} 
+			 \includegraphics[width=\textwidth]{\StyleDir dss_logo_only_blue}
+		\end{minipage}
+		%
+		\begin{minipage}[t][0.25cm][c]{17mm}
+				\bfseries
+				\scalebox{0.7}{Digital Signal Processing} \\
+				\scalebox{0.7}{and System Theory}
+		\end{minipage}
+		%	
+		\hspace{3mm}
+		%
+		%----------------------------------------------------------------------------------------------
+		% Middle section: author, title
+		%----------------------------------------------------------------------------------------------
+		\begin{minipage}[t][0.25cm][c]{60mm}
+			\insertauthor \;$|$ \insertshorttitle
+		\end{minipage}
+		%
+		\hfill
+		%----------------------------------------------------------------------------------------------
+		% Right section: slide number
+		%----------------------------------------------------------------------------------------------
+		\begin{minipage}[t][0.25cm][c]{15mm}
+			\SlideName \; \insertframenumber / \inserttotalframenumber
+		\end{minipage}
+	\end{beamercolorbox} 
+}
+
+%--------------------------------------------------------------------------------------------------
+% Command for packing four slides on one DIN A4 page
+%--------------------------------------------------------------------------------------------------
+\newcommand{\makeHandout}{
+	\pgfpagesuselayout{4 on 1}[a4paper,border shrink=5mm, landscape]
+	\mode<handout>{\setbeamercolor{background canvas}{bg=black!5}}
+}
+

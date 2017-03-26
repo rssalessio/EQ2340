@@ -1,0 +1,72 @@
+\section{Test: Infinite duration HMM}
+For the test of an infinite HMM an example of the course compendium on page 121 has been taken. This example uses a discrete output distribution.
+$$
+A = 
+ \begin{pmatrix}
+  0.3 & 0.7 & 0 \\
+  0 & 0.5 & 0.5\\
+  0 & 0 & 1\\
+ \end{pmatrix} \quad
+ \mathbf{q} = 
+ \begin{pmatrix}
+  1\\
+  0\\
+  0
+ \end{pmatrix} 
+ \quad
+ B=
+ \begin{pmatrix}
+  1 & 0 & 0 & 0 \\
+  0 & 0.5 & 0.4 & 0.1\\
+  0.1 & 0.1& 0.2 &0.6\\
+ \end{pmatrix} \quad
+ $$
+ 
+ The observed sequence is $\underline{x}=(1,2,4,4,1)$ and the forward algorithm gives: $$\underline{c} =(1,0.35,0.35,\frac{79}{140},0.0994)$$ In order to compare the computational results, the backward variables have been calculated by hand as described in the course compendium, i.e. for $t=4$ and $t=5$:
+\begin{align*}
+\hat{\beta}_{1,5}&=\frac{1}{0.0994}=10.0604\\
+\hat{\beta}_{2,5}&=\frac{1}{0.0994}=10.0604\\
+\hat{\beta}_{3,5}&=\frac{1}{0.0994}=10.0604\\
+\hat{\beta}_{1,4}&=\frac{140}{79}[\frac{0.3}{0.0994}+0+0]=5.3485\\
+\hat{\beta}_{2,4}&=\frac{140}{79}[0+0+\frac{0.5\cdot0.1}{0.0994}]=0.8914\\
+\hat{\beta}_{3,4}&=\frac{140}{79}[0+0\frac{0.1}{0.0994}]=1.7828
+\end{align*}
+This recursion goes on until the final result is obtained
+\begin{align*}
+\hat{\beta} = 
+ \begin{pmatrix}
+  0.9997   & 0.3311 &   0.1783 &   5.3485 &  10.0604 \\
+  0.9760 &   2.8562 &   1.6555 &   0.8914&   10.0604\\
+  0.5239   & 5.2394 &   3.0563 &   1.7828 &  10.0604\\
+ \end{pmatrix} \quad
+\end{align*}
+
+Afterwards, the following algorithm has been run
+\begin{lstlisting}
+clc; clear all; close all;
+
+A       = [0.3 0.7 0;0 0.5 0.5; 0 0 0.1];
+q       = [1;0;0];
+mc      = MarkovChain(q,A);
+
+B(1)    = DiscreteD([1 0 0 0]);
+B(2)    = DiscreteD([0 0.5 0.4 0.1]);
+B(3)    = DiscreteD([0.1 0.1 0.2 0.6]);
+
+x   = [1 2 4 4 1];
+c   = [1; 0.35 ; 0.35; 79/140; 0.0994];
+
+pX  = prob(B,x);
+%pX = [1 0 0 0 1;0 0.5 0.1 0.1 0;0.1 0.1 0.6 0.6 0.1];
+
+betaHat=backward(mc,pX,c)
+\end{lstlisting} 
+The output of this lines is
+\begin{lstlisting}
+betaHat =
+
+    0.9997    0.3311    0.1783    5.3485   10.0604
+    0.9760    2.8562    1.6555    0.8914   10.0604
+    0.5239    5.2394    3.0563    1.7828   10.0604
+\end{lstlisting}
+which proves that the algorithm also works for infinite HMM. Furthermore a second test has been run which is omitted here.

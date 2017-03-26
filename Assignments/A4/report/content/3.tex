@@ -1,0 +1,43 @@
+
+\section{System}
+In this section a general description of the system is given. First is discussed how we choose the training and validation set, then a general scheme of the classification system is given.
+\subsection{Training and validation sets}
+We make use of the \textit{Cross-Validation} technique to split up the dataset. Specifically, we use the \textit{k-fold cross validation}. This method splits the data set in $k$ equal sized samples, of which $k-1$ are used as training set and the remaining one as validation set. Once we have the training and validation sets, we first train the model on the training set and then check the error based on the validation set. We repeat this process $k$ times, choosing in the end the validation and training sets that have given the best performances. An average error of the \textit{k}-fold process, and also the variance, will be presented.\\ \\
+This method was preferred to \textit{repeated random sub-sampling validation} because in this way we are sure that all data is used at least once in training and validation. A problem of \textit{k-fold cross validation} appears when you have an outlier in the data: it will be used $k-1$ times as training data, skewing the results. It is not a problem in this project since all recordings were checked beforehand.\\ \\
+To make sure that there is an appropriate number of recording for each person in the training set, the following consideration was made.\\ Suppose we have a total of $N_i$ recordings for a certain word $i$, then the training set will be composed of: $$\frac{(k-1)N_i}{k}$$ recordings. For each person $j$ we have $N_{ij}$ recordings, such that $$N_i=\sum_{j=1}^{5} N_{ij}$$
+For each person $j$, for the word $i$, we divide the recordings in $k$ folds, so the training set for the person $j$, word $i$ is given by $T_{ij}$. Then the final training set is given by:
+$$T_i = {\cup_{j=1}^{5}T_{ij}}$$
+The size of $T_i$ is:
+$$|T_i| = \sum_{j=1}^{5} |T_{ij}| = \sum_{j=1}^5 \frac{(k-1)N_{ij}}{k} = \frac{k-1}{k}\sum_{j=1}^5 N_{ij}= \frac{k-1}{k}N_i$$
+as expected.
+\newpage
+\subsection{Classification system}
+For a given word, the system first extracts the \textit{MFCC} features of that word as discussed in assignment $2$. We obtain a feature vector $\mathbf{x}$ that is fed into each \textit{HMM} $\lambda^i, \forall i$ and we obtain the value $P_i(\mathbf{x})=P(\mathbf{x}|\lambda^i)$ for each \textit{HMM}. Then we apply the argmax operator on these value in order to choose the most probable \textit{HMM} that generates $\mathbf{x}$. The result is $\hat{i}=\underset{i}{\operatorname{argmax}}  P_i(\mathbf{x})$.
+The scheme is shown in figure \ref{class_sys}.
+\begin{figure}[ht]
+  \begin{center}
+ \begin{tikzpicture}[>=latex']
+        \tikzset{block/.style= {draw, rectangle, align=center,minimum width=2cm,minimum height=1cm},
+        rblock/.style={draw, shape=rectangle,rounded corners=1.5em,align=center,minimum width=2cm,minimum height=1cm},
+        input/.style={ % requires library shapes.geometric
+        draw,
+        trapezium,
+        trapezium left angle=60,
+        trapezium right angle=120,
+        minimum width=2cm,
+        align=center,
+        minimum height=1cm
+    },
+        }
+        \node [rblock]  (start) {Start};
+        \node [block, right =1cm of start] (feature) {MFCC\\ Feature Extraction};
+        \node [block, right =1cm of feature] (test) {$P(\mathbf{x}|\lambda^i), \forall i$};
+        \node [rblock, right =1cm of test] (final) {$\underset{i}{\operatorname{argmax}}  P_i(\mathbf{x})$ };
+%% paths
+        \path[draw,->] (start) -- (feature)	node [pos=0.5,above,font=\footnotesize] {word};
+        \path[draw,->] (feature) -- (test)	node [pos=0.5,above,font=\footnotesize] {$\mathbf{x}$};
+        \path[draw,->] (test) -- (final)	node [pos=0.5,above,font=\footnotesize] {$P_i(\mathbf{x})$};
+    \end{tikzpicture}    \caption{Scheme of the classification system}
+    \label{class_sys}
+  \end{center}
+\end{figure}

@@ -1,0 +1,8 @@
+\contentsline {section}{\numberline {1}Forward Algorithm and logprob function}{2}{section.1}
+\contentsline {subsection}{\numberline {1.1}Procedure}{2}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}Code Analysis}{4}{subsection.1.2}
+\contentsline {subsection}{\numberline {1.3}Logprob function}{6}{subsection.1.3}
+\contentsline {section}{\numberline {2}Speech Corpus}{8}{section.2}
+\contentsline {section}{\numberline {3}System}{9}{section.3}
+\contentsline {subsection}{\numberline {3.1}Training and validation sets}{9}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Classification system}{10}{subsection.3.2}

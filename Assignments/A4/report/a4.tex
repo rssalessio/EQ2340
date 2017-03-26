@@ -1,0 +1,51 @@
+\documentclass[10pt,a4paper,final]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{mcode}
+\usepackage{subcaption}
+\usepackage{caption}
+\usepackage{hyperref}
+\usepackage{tikz}
+
+\usetikzlibrary{arrows,positioning,shapes.geometric}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+\author{Alessio Russo - alessior@kth.se (911103-T192) \\ Lars Lindemann - llindem@kth.se (891113-4131)}
+\title{KTH - Royal Institute of Technology \\ \Large{Pattern Recognition (EQ2340) - Exercise Project }\\ A.4 - Algorithm Verification and Speech Database}
+
+\date{October 2015}
+
+
+% Definition of \maketitle
+\makeatletter         
+\def\@maketitle{
+\begin{center}
+\includegraphics[scale=0.1]{./images/kthlogo.png}\\
+{\@title }\\[4ex] 
+{\@author}\\[4ex] 
+\@date\\[8ex]
+
+\end{center}}
+\makeatother
+
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+
+\clearpage
+\input{content/1.tex}
+\newpage
+\input{content/2.tex}\\
+\newpage
+\input{content/3.tex}
+\end{document}

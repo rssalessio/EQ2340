@@ -1,0 +1,45 @@
+\section{Speech Corpus}
+In order to test the speech recognition system, a database has been recorded. The database consists of 14 different words with distinct difficulties. Multisyllabic words as \textbf{recognition} and \textbf{environment}, similar sounding words as \textbf{affect} and \textbf{effect} and short words as \textbf{I}, \textbf{am}, \textbf{in} and \textbf{is} in order to challenge the system. Other random words are added and listed in table \ref{ta:words}. Additionally, this database allows it to form some simple sentences like \textbf{I am Lars} or \textbf{Alessio is in Stockholm}, which could be tested.\\ \\\
+Each word has been recorded at least 10 times, and at most 20 times, by every person listed in table \ref{ta:people}. In the end we have at least $50$ recordings for each word, making a total of at least $700$ recordings. Of the people listed in table \ref{ta:people}, only Paolo used his microphone to record the words, for all the other people each recording has been done with the same microphone(built-in mac microphone). The same settings(16 bit mono wav files with 22050 Hz) were used every time, and the software used was \textit{Audacity}. The test person is supposed to sit half a meter away from the microphone in a silent environment.
+\begin{table}[ht]
+\begin{tabular}{|l|l|}
+\hline
+\bf{Type} & \bf{Words}\\
+\hline
+Multisyllabic & recognition, environment\\
+\hline
+Similar & affect, effect\\
+\hline
+Short & I, am, in, is\\
+\hline
+Names & Alessio, Lars\\
+\hline
+Random & hand, chair, markov, Stockholm \\
+\hline
+\end{tabular}
+\centering
+\caption{Speech Corpus}
+\label{ta:words}
+\end{table}
+
+\begin{table}[ht]
+\begin{tabular}{|l|l|}
+\hline
+\bf{Person} & \bf{Nationality} \\
+\hline
+Lars & German\\
+\hline
+Alessio & Italian\\
+\hline
+Natalie & Dutch\\
+\hline
+Martin & Swiss\\
+\hline
+Paolo & Italian \\
+\hline
+\end{tabular}
+\centering
+\caption{Test person}
+\label{ta:people}
+\end{table}
+The database contains variation in the following sense: we have people from multiple nationalities, thus different accents. Moreover, we also have a female voice and recordings done with a different microphone.

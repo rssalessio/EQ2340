@@ -1,0 +1,65 @@
+\documentclass[11pt, t]{beamer} 
+\setcounter{MaxMatrixCols}{20}
+\usepackage{multimedia}
+\usepackage{hyperref} 
+
+%--------------------------------------------------------------------------------------------------
+% Set language options and load DSS beamer template
+%    Set the directory of the template by \newcommand{\StyleDir}{<yourDir>}. <yourDir> can be a
+%    relative or absolute path and is necessary to find the images contained in the template.
+%--------------------------------------------------------------------------------------------------
+\newcommand{\SlideName}{Slide}
+%\newcommand{\StyleDir}{E:/dss_tools/latex/dss_beamer_template/style/}
+\newcommand{\StyleDir}{style/}
+
+\input{\StyleDir dss_beamer}
+%\input{\StyleDir dss_beamer_squeeze}
+
+
+%--------------------------------------------------------------------------------------------------
+% Pack four slides on one DIN A4 page
+%--------------------------------------------------------------------------------------------------
+%\makeHandout
+
+
+%--------------------------------------------------------------------------------------------------
+% Title settings, e.g. author, title, ... 
+%--------------------------------------------------------------------------------------------------
+\title[Speech Recognition - EQ 2340]{Speech Recognition - EQ2340}
+\subtitle{HMM (Hidden Markov Models)}
+\author[Alessio Russo and Lars Lindemann]{Alessio Russo  	Lars Lindemann  }
+\date[2015/11/03]{3rd November, 2015}
+\institute[KTH]{Royal Institute of Technology (KTH, Stockholm)  \vspace{1mm}}
+
+%--------------------------------------------------------------------------------------------------
+% Start of document
+%--------------------------------------------------------------------------------------------------
+\begin{document}
+
+\setbeamercovered{dynamic}
+\frame[plain]{\titlepage      % titlepage without headline, footline and frametitle
+\setcounter{framenumber}{0}}  % reset pagenumber (firstpage will be No. 1)
+
+%--------------------------------------------------------------------------------------------------
+% Table of contents
+%--------------------------------------------------------------------------------------------------
+\section*{Content}
+% --- Give this slide the name 'contentframe' so it can be repeated later later on
+\begin{frame}<1>[label = contentframe]{Content}{\quad} 
+	\setcounter{tocdepth}{2}
+  \tableofcontents  
+\end{frame}
+
+%--------------------------------------------------------------------------------------------------
+% Include sections
+%--------------------------------------------------------------------------------------------------
+\input{./sections/introduction.tex}
+\againframe<2>{contentframe}   % repeat the table of contents
+\input{./sections/system.tex}
+\againframe<2>{contentframe}   % repeat the table of contents
+\input{./sections/results.tex}
+
+%--------------------------------------------------------------------------------------------------
+% End of document
+%--------------------------------------------------------------------------------------------------
+\end{document}

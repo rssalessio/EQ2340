@@ -1,0 +1,28 @@
+\section{Dynamic Features}
+In order to get better classification results, dynamic features have been implemented by a simple function using the Matlab \textit{diff} command. This functions allows it to get information about the relative differences between the sampling instances.
+\begin{lstlisting}
+function [MFCC,f,t] = mfcc_dyn(signal,fs,window_length,num_cepstral)
+
+% Calculate Cepstral
+[mfccs,~,f,t]       = GetSpeechFeatures(signal,...
+                                fs,window_length,num_cepstral);
+% Make the signal have 0 mean and unit variance
+mfccs       = mfccs-repmat(mean(mfccs,2),1,size(mfccs,2));
+norm_f      = (std(mfccs.')).';
+MFCC        = mfccs.*repmat((1./norm_f),1,size(mfccs,2));
+% Calculate dynamic features
+delta       = diff(MFCC.');
+delta_f     = [delta(1,:) ;delta];
+deltadelta  = diff(delta);
+deltadelta_f= [deltadelta(1,:); deltadelta(1,:); deltadelta];
+% Concatenate dynamic features into whole feature vector
+MFCC        = [MFCC;delta_f.';deltadelta_f.'];
+end
+\end{lstlisting}
+It should be noted here, that the \textit{diff} command outputs one values less than it gets as an input, e.g. if the input has 120 samples, the output has 119 samples. This is why the output of the function has been manipulated (first value has been copied) in order to retain the same size. The function can be used in the following way:
+\begin{lstlisting}
+window_length = 0.03; %in ms
+num_cepstral  = 13;
+[mfcc,f,t] = mfcc_dyn(y_female, fs_female, window_length, num_cepstral);
+\end{lstlisting}
+The file is attached to this report.

@@ -1,0 +1,13 @@
+\beamer@endinputifotherversion {3.36pt}
+\beamer@sectionintoc {2}{Introduction}{3}{0}{1}
+\beamer@subsectionintoc {2}{1}{Problem Formulation}{3}{0}{1}
+\beamer@subsectionintoc {2}{2}{System architecture}{8}{0}{1}
+\beamer@sectionintoc {3}{System Design, Training and Testing}{11}{0}{2}
+\beamer@subsectionintoc {3}{1}{Feature Extraction}{11}{0}{2}
+\beamer@subsectionintoc {3}{2}{HMM}{17}{0}{2}
+\beamer@subsectionintoc {3}{3}{Training data and validation set}{22}{0}{2}
+\beamer@subsectionintoc {3}{4}{Testing and tweaking}{24}{0}{2}
+\beamer@sectionintoc {4}{Results}{30}{0}{3}
+\beamer@subsectionintoc {4}{1}{System Performance}{30}{0}{3}
+\beamer@subsectionintoc {4}{2}{Conclusion}{34}{0}{3}
+\beamer@subsectionintoc {4}{3}{Live Demonstration}{40}{0}{3}

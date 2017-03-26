@@ -1,0 +1,328 @@
+\typeout{^^J beamer_dss.tex, version 2.11,  2012-10-03^^J}
+
+
+%--------------------------------------------------------------------------------------------------
+% TODO:
+%	 o Kopfzeile fehlt komplett wenn frame durch \begin{frame} und nicht durch \begin{frame}{}{} erzeugt wird
+%   o Seltsames Verhalten der minipages in den Fußzeilen. Evtl. durch parboxen ersetzen und Höhen anpassen
+%   o \usecolortheme, \useinnertheme loswerden und einfach alles selbst definieren
+%   o Make a nice color pallette
+%   o \reserveandshow erweitern für beliebige Seitenzahlen (wirklich?)
+%   o \islanguage oder wie das heißt für Sprache einbauen
+%   o \soundexample durch \dsssound ersetzt, das auf media9 basiert (Nachfolger von movie15). Kann optisch
+%     noch ein wenig verbessert werden. Miktex 2.9 nötig! Wenn kein Text für den Player-Icon angegeben und LaTeX->PS->...
+%     kompiliert wird, muss dvips ohne die Option -p pdf aufgerufen werden!
+%
+% Irgendwann mal
+%		o Das alles hier in .sty verwandeln
+%
+%--------------------------------------------------------------------------------------------------
+
+
+%--------------------------------------------------------------------------------------------------
+% Packages
+%--------------------------------------------------------------------------------------------------
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{verbatim}
+\usepackage{pgfpages}
+\usepackage{booktabs}
+\usepackage{psfrag}
+\usepackage[bigfiles]{media9}
+\usepackage{multimedia}
+\usepackage{calc}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usetikzlibrary{mindmap,trees}
+
+%--------------------------------------------------------------------------------------------------
+% Define macros for math
+%--------------------------------------------------------------------------------------------------
+\newcommand{\tindex}[1]{_{\textrm{\normalsize{#1}}}}
+
+% --- Text index and superscript
+\newcommand{\tidx}[1]{_{\mathrm{#1}}}
+\newcommand{\tsup}[1]{^{\mathrm{#1}}}
+
+% --- KiRAT code and ini-file parts
+\newenvironment{filepath}{\begin{quote} \ttfamily}{\end{quote}}
+\newcommand{\inikey}[1]{\texttt{#1}}
+
+%--------------------------------------------------------------------------------------------------
+% Define macros other
+%--------------------------------------------------------------------------------------------------
+\newcommand{\headline}[1]{\textcolor{tf_blue_light}{\textbf{#1}}}
+\newcommand{\highlight}[1]{\textcolor{tf_blue_light}{#1}}
+
+% --- Show a picture only from the second slide on. For the first slide an empty box of the same
+%     size as the graphic is created to avoid wobbeling of the content
+\newcommand{\reserveandshow}[2][]{
+    \phantom{\includegraphics<+>[#1]{#2}}
+    \includegraphics<+->[#1]{#2}
+}
+
+
+% --- Include audio files: using the new media9 package. Has a nice status bar during playback.
+% Use as \dsssound{<file>}{<text for the box>}{<boxcolor>}{<boxwidth>}
+% Remember that <file> canNOT include the path. Set the media path in the TeX document's
+% preamble using \addmediapath{<directory>}
+\newcommand{\dsssound}[4]{{%Note: needs the double {{ for use in tabulars (http://tex.stackexchange.com/questions/147744/media9-in-tables)
+	\includemedia[
+		addresource=#1,
+      transparent,
+		deactivate=onclick,
+		flashvars={
+			source=#1
+		   &autoPlay=true
+		},
+	]{\begin{beamercolorbox}[rounded=true, wd=#4, shadow=false]{#3}
+        #2
+     \end{beamercolorbox}}{APlayer.swf}%
+}}
+
+% --- Block environment with variable width, taken from http://www.latex-community.org/viewtopic.php?f=4&t=2251
+\newenvironment<>{varblock}[2][\textwidth]{
+      \begin{minipage}{#1}
+        \setlength{\textwidth}{#1}
+          \begin{actionenv}#3
+            \def\insertblocktitle{#2}
+            \par
+            \usebeamertemplate{block begin}}
+  {\par
+      \usebeamertemplate{block end}
+    \end{actionenv}
+  \end{minipage}}
+
+%--------------------------------------------------------------------------------------------------
+% Beamer themes
+%--------------------------------------------------------------------------------------------------
+\usetheme{default}
+
+%\useinnertheme[shadow]{rounded} % TODO: try to get along without those two guys...
+%\usecolortheme{orchid}
+\usefonttheme[onlymath]{serif}     % Use serif fonts for mathematical text
+
+\setbeamertemplate{headline}[default]
+
+\setbeamersize{text margin left = 0.5cm, text margin right = 0.5cm} % sets frame margins
+\beamertemplatenavigationsymbolsempty % no navigation symbols
+\setbeamercovered{invisible} % uncovered objects are invisible, other are "dynamic", "higly dynamic", "tranparent=n%"
+
+%--------------------------------------------------------------------------------------------------
+% Define colors
+%--------------------------------------------------------------------------------------------------
+% --- Original CAU colors for TF
+%\definecolor{tf_blue_light}{RGB}{0, 43, 217}   % Fakultätsfarbe: Pantone 280
+\definecolor{tf_blue_dark}{RGB}{0, 0, 191}     % Mischfarbe: HKS 33 + Pantone 280
+
+% --- Colors of ppt template
+\definecolor{tf_blue_light}{RGB}{0, 33, 146}  % color from PPT-template
+\definecolor{dss_light_gray}{RGB}{216, 216, 216}  % color from PPT-template
+\definecolor{dss_dark_gray}{RGB}{149, 149, 149}  % color from PPT-template
+
+% --- My color pallette
+\definecolor{jow_yellow}{RGB}{247, 212, 143}
+\definecolor{jow_green}{RGB}{178, 212, 178}
+\definecolor{jow_blue}{RGB}{117, 166, 214}
+\definecolor{jow_red}{RGB}{241, 167, 144}
+
+% --- Make all colors available as beamer colors
+\setbeamercolor{tf_blue_dark}{bg=tf_blue_dark}
+\setbeamercolor{tf_blue_light}{bg=tf_blue_light}
+\setbeamercolor{dss_light_gray}{bg=dss_light_gray}
+\setbeamercolor{dss_dark_gray}{bg=dss_dark_gray}
+
+\setbeamercolor{jow_green}{bg=jow_green}
+\setbeamercolor{jow_blue}{bg=jow_blue}
+\setbeamercolor{jow_yellow}{bg=jow_yellow}
+\setbeamercolor{jow_red}{bg=jow_red}
+
+
+%--------------------------------------------------------------------------------------------------
+% Set colors
+%--------------------------------------------------------------------------------------------------
+%--- Colors of header
+\setbeamercolor{frametitle}{fg=white,bg=tf_blue_light} 
+\setbeamercolor{framesubtitle}{fg=black,bg=dss_light_gray} 
+
+\setbeamercolor{title}{fg=black, bg=dss_dark_gray}
+\setbeamerfont{institute}{size = \scriptsize}
+\setbeamerfont{date}{parent=institute}
+\setbeamerfont{title}{parent=institute} 
+\setbeamerfont{subtitle}{parent=institute} 
+
+% --- Colors of blocks
+\setbeamertemplate{blocks}[rounded][shadow=true]
+\setbeamercolor{block title}{fg=white,bg=tf_blue_light}
+\setbeamercolor{block body}{bg=dss_light_gray}
+\setbeamercolor{structure}{fg=tf_blue_light}
+
+%--------------------------------------------------------------------------------------------------
+% Set bullets for...
+%--------------------------------------------------------------------------------------------------
+% --- Table of contents
+\setbeamertemplate{sections/subsections in toc}[sections numbered]
+\setbeamertemplate{subsection in toc}{\qquad -  \inserttocsubsection \par }
+		
+% --- Itemizations
+\setbeamertemplate{itemize item}[triangle]
+\setbeamertemplate{itemize subitem}[circle]
+\setbeamertemplate{itemize subsubitem}[circle]
+
+% --- Enumerations
+\setbeamertemplate{enumerate items}[default]
+
+%--------------------------------------------------------------------------------------------------
+% Set titleframe
+%--------------------------------------------------------------------------------------------------
+\setbeamertemplate{title page}
+{
+	%------------------------------------------------------------------------------------------------
+	% Blue box
+	%------------------------------------------------------------------------------------------------
+	\vspace{-2.1mm}
+	\begin{beamercolorbox}[wd=\paperwidth,ht=7mm,leftskip=2mm,dp=4mm]{frametitle}	
+		\hfill
+%		\begin{minipage}{0.26\paperwidth}
+%			\vspace{-1mm}
+%			\includegraphics[width=\textwidth]{\StyleDir cau_logo_big}
+%		\end{minipage}		
+	\end{beamercolorbox}
+	
+	\vskip-1.0mm % to remove a tiny white space between both bars
+	
+	%------------------------------------------------------------------------------------------------
+	% Dark gray box
+	%------------------------------------------------------------------------------------------------
+	\begin{beamercolorbox}[wd=\paperwidth,ht=10mm,leftskip=2mm,dp=10mm, rightskip = 0.5mm]{title}
+		\begin{minipage}[c]{1.0\paperwidth} 
+			\usebeamerfont{title} \inserttitle \newline
+			\usebeamerfont{subtitle} \insertsubtitle
+		\end{minipage}
+	\end{beamercolorbox}
+	
+	%------------------------------------------------------------------------------------------------
+	% Light gray box
+	%------------------------------------------------------------------------------------------------
+	\vskip-1.4mm % to remove a tiny white space between both bars	
+	\begin{beamercolorbox}[wd=\paperwidth,ht=62.0mm,leftskip=2mm,dp=144mm, rightskip = 0.5mm]{framesubtitle}
+	\begin{columns}
+		\column{0.4\textwidth}
+		\begin{center}
+	 		Alessio Russo\\
+	 		%alessior@kth.se\\
+			\vspace{1mm}
+			\includegraphics[width=0.45\textwidth]{\StyleDir alessio}\\
+			Control Engineering (Politecnico di Milano)
+		\end{center}	 
+		\column{0.4\textwidth}
+		\begin{center}
+			Lars Lindemann\\
+			%llindem@kth.se\\
+			\vspace{1mm}
+			\includegraphics[width=0.4\textwidth]{\StyleDir lars}\\
+			Systems, Control and Robotics (KTH)\\
+		\end{center}	
+		\end{columns}	
+	\vspace{10mm}
+	\insertinstitute  \newline
+	\insertdate
+	\end{beamercolorbox}
+}
+
+%--------------------------------------------------------------------------------------------------
+% Set frametitle
+%--------------------------------------------------------------------------------------------------
+\setbeamertemplate{frametitle}
+{
+	%------------------------------------------------------------------------------------------------
+	% Blue box
+	%------------------------------------------------------------------------------------------------
+	\vspace{-0.4mm}
+	\begin{beamercolorbox}[wd=\paperwidth,ht=7.3mm,leftskip=2mm,dp=4mm]{frametitle}	
+		\usebeamerfont{frametitle} \insertframetitle
+		\hfill
+%		\begin{minipage}[c]{0.26\paperwidth}
+%			\vspace{-1mm}
+%			\includegraphics[width=\textwidth]{\StyleDir cau_logo_big}
+%		\end{minipage}		
+	\end{beamercolorbox}
+	
+	\vskip-1.4mm % to remove a tiny white space between both bars
+	
+	%------------------------------------------------------------------------------------------------
+	% Light gray box
+	%------------------------------------------------------------------------------------------------	
+	\begin{beamercolorbox}[wd=\paperwidth,ht=4.0mm,leftskip=2mm,dp=2mm, rightskip = 0.5mm]{framesubtitle}	
+			\usebeamerfont{framesubtitle} \insertframesubtitle
+	\end{beamercolorbox}
+	
+}
+
+%--------------------------------------------------------------------------------------------------
+% Set footline
+%--------------------------------------------------------------------------------------------------
+\setbeamertemplate{footline}{		
+	%------------------------------------------------------------------------------------------------
+	% Left section: DSS logo
+	%------------------------------------------------------------------------------------------------
+	\begin{beamercolorbox}[wd=\paperwidth,ht=1.0mm,leftskip=3mm,dp=3.5mm]{framesubtitle}
+%		\begin{minipage}[t][0.25cm][c]{0.95cm} 
+%			 \includegraphics[width=\textwidth]{\StyleDir dss_logo_only_blue}
+%		\end{minipage}
+%		%
+%		\begin{minipage}[t][0.25cm][c]{17mm}
+%				\bfseries
+%				\scalebox{0.7}{Digital Signal Processing} \\
+%				\scalebox{0.7}{and System Theory}
+%		\end{minipage}
+		%	
+		\hspace{3mm}
+		%
+		%----------------------------------------------------------------------------------------------
+		% Middle section: author, title
+		%----------------------------------------------------------------------------------------------
+		\begin{minipage}[t][0.25cm][c]{60mm}
+			% Don't ask me why the scalebox is needed. Anyway, it prevents from a linebreak after \insertshortauthor
+			\scalebox{1.0}{\insertshortauthor \;$|$ \insertshorttitle} 
+		\end{minipage}
+		%
+		\hfill
+		%----------------------------------------------------------------------------------------------
+		% Right section: slide number
+		%----------------------------------------------------------------------------------------------
+		\begin{minipage}[t][0.25cm][c]{15mm}
+			\SlideName \; {\insertframenumber}/{\inserttotalframenumber}
+		\end{minipage}
+	\end{beamercolorbox} 
+}
+
+%--------------------------------------------------------------------------------------------------
+% Command for packing four slides on one DIN A4 page (works only with pdflatex!)
+%--------------------------------------------------------------------------------------------------
+\newcommand{\makeHandout}{
+	\pgfpagesuselayout{4 on 1}[a4paper,border shrink=5mm, landscape]
+	\mode<handout>{\setbeamercolor{background canvas}{bg=black!5}}
+}
+
+
+%--------------------------------------------------------------------------------------------------
+% Keys to support piece-wise uncovering of elements in TikZ pictures:
+%     \node[visible on=<2->](foo){Foo}
+%
+% Helpful, e.g., for including overlays in TikZ mindmaps.
+% Found here: http://tex.stackexchange.com/questions/55806/tikzpicture-in-beamer
+%--------------------------------------------------------------------------------------------------
+\tikzset{
+	invisible/.style={opacity=0},
+	visible on/.style={alt=#1{}{invisible}},
+	alt/.code args={<#1>#2#3}{%
+		\alt<#1>{\pgfkeysalso{#2}}{\pgfkeysalso{#3}}
+	},
+}
+
